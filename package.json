@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "dependencies": {
+    "pubstorm": "0.1.*"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "laravel-elixir": "^4.2.0",
+    "yargs": "^4.6.0"
+  }
+}

@@ -1,0 +1,2 @@
+./vendor/bin/jigsaw build
+./node_modules/pubstorm/bin/storm.js publish
