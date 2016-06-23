@@ -1,2 +1,3 @@
+#!/bin/sh
 ./jigsaw build
 ./storm publish
