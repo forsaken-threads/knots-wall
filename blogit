@@ -1,2 +1,2 @@
 ./jigsaw build
-./storm.js publish
+./storm publish
