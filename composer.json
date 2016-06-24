@@ -5,7 +5,7 @@
         }
     },
     "require": {
-        "tightenco/jigsaw": "dev-master"
+        "tightenco/jigsaw": "dev-puzzle-pieces"
     },
     "repositories": [
         {

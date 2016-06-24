@@ -12,11 +12,11 @@ class BlogMetaBuilder extends PuzzlePiece implements BuildModifier
 
     public function modify()
     {
-        // TODO: Implement modify() method.
+        echo "here\n";
     }
 
     public function register()
     {
-        // TODO: Implement register() method.
+        $this->container->tag(get_class($this), 'jigsaw.build_modifier.pass.1');
     }
 }
