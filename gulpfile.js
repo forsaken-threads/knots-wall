@@ -14,24 +14,22 @@ elixir.config.publicPath = 'source';
 elixir(function(mix) {
     var env = argv.e || argv.env || 'local';
 
-    mix.sass('main.scss')
+    mix
+        .scripts([
+            paths.bower + '/bootstrap/dist/js/bootstrap.js'
+        ], 'source/js/other.js', './')
+        .styles([
+            paths.bower + '/bootstrap/dist/css/bootstrap.css',
+            paths.bower + '/font-awesome/css/font-awesome.css'
+        ], 'source/css/other.css', './')
+        .copy(paths.bower + '/bootstrap/dist/fonts/*.*', 'source/fonts/')
+        .copy(paths.bower + '/font-awesome/fonts/*.*', 'source/fonts/')
+        .sass('main.scss')
         .exec('./jigsaw build ' + env, ['./source/*', './source/**/*', '!./source/_assets/**/*'])
         .browserSync({
             server: { baseDir: 'build_' + env },
             proxy: null,
             files: [ 'build_' + env + '/**/*' ]
         });
-
-    mix.scripts([
-        paths.bower + '/bootstrap/dist/js/bootstrap.js'
-    ], 'build_' + env + '/js/other.js', './');
-
-    mix.styles([
-        paths.bower + '/bootstrap/dist/css/bootstrap.css',
-        paths.bower + '/font-awesome/css/font-awesome.css'
-    ], 'build_' + env + '/css/other.css', './');
-
-    mix.copy(paths.bower + '/bootstrap/dist/fonts/*.*', 'build_' + env + '/fonts/')
-        .copy(paths.bower + '/font-awesome/fonts/*.*', 'build_' + env + '/fonts/');
 
 });

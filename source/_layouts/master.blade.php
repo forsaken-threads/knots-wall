@@ -9,6 +9,8 @@
         <script src="/js/other.js"></script>
     </head>
     <body>
-        @yield('body')
+        <div class="container-fluid">
+            @yield('body')
+        </div>
     </body>
 </html>

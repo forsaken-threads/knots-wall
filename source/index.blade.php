@@ -1,7 +1,12 @@
 @extends('_layouts.master')
 
 @section('body')
-<div class="jumbotron">The Knots Wall</div>
-<p>Long live open source.</p>
-<p>@doofus('Goodbye, dino!')</p>
+    @blogmeta({
+        "title": "This is the End",
+        "author": "My only friend, the End."
+    })
+    <div class="jumbotron"><h1>The Knots Wall</h1></div>
+    <h1>{{ $title or 'none'}}</h1>
+    <p><sub>by {{ $author or 'none' }}</sub></p>
+    <p>@doofus('Goodbye, dino!')</p>
 @endsection

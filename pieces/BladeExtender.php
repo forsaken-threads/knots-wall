@@ -14,8 +14,4 @@ class BladeExtender extends PuzzlePiece {
         });
     }
 
-    public function register()
-    {
-
-    }
 }
