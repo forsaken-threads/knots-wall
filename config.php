@@ -1,12 +1,12 @@
 <?php
 
 use KnotsWall\BladeExtender;
-use KnotsWall\BLog\Blogger;
+use KnotsWall\Collector\Collector;
 
 return [
     '_puzzle_pieces' => [
         BladeExtender::class,
-        Blogger::class,
+        Collector::class,
     ],
     'production' => false,
 ];
