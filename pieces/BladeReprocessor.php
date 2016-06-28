@@ -1,6 +1,7 @@
 <?php namespace KnotsWall;
 
 use Illuminate\View\Factory;
+use Symfony\Component\Finder\SplFileInfo;
 use TightenCo\Jigsaw\Handlers\BladeHandler;
 use TightenCo\Jigsaw\ProcessedFile;
 
@@ -26,6 +27,16 @@ class BladeReprocessor extends BladeHandler
         $filename = $this->reprocess() ? $file->getFilename() : ($file->getBasename('.blade.reprocess.php') . '.html');
         $this->reprocess = false;
         return new ProcessedFile($filename, $file->getRelativePath(), $this->render($file, $data));
+    }
+
+    /**
+     * @param SplFileInfo $file
+     * @param $data
+     * @return string
+     */
+    public function render($file, $data)
+    {
+        return $this->viewFactory->file($file->getRealPath(), $data)->render();
     }
 
     private function reprocess()

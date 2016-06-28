@@ -1,12 +1,12 @@
 <?php
 
 use KnotsWall\BladeExtender;
-use KnotsWall\BlogMetaBuilder;
+use KnotsWall\BLog\Blogger;
 
 return [
     '_puzzle_pieces' => [
         BladeExtender::class,
-        BlogMetaBuilder::class,
+        Blogger::class,
     ],
     'production' => false,
 ];

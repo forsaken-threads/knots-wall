@@ -1,19 +1,17 @@
-<?php namespace KnotsWall;
+<?php namespace KnotsWall\Blog;
 
 use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\Factory;
 use TightenCo\Jigsaw\BuildDecorator;
 
-class BlogMetaBuilder extends BuildDecorator
+class Blogger extends BuildDecorator
 {
     public function boot()
     {
         /** @var BladeCompiler $blade */
         $blade = $this->container[BladeCompiler::class];
-        $blade->directive('blogmeta', function($meta) {
-            $meta = json_decode(substr($meta, 1, -1), true);
-            $meta = $this->makeExtractable($meta);
-            return "<?php extract($meta); ?>";
+        $blade->directive('blogger', function($instructions) {
+            $instructions = json_decode(substr($instructions, 1, -1), true);
+            return $this->processInstructions($instructions);
         });
     }
 
@@ -27,6 +25,11 @@ class BlogMetaBuilder extends BuildDecorator
         $this->container->registerPuzzlePiece(BladeReprocessor::class);
     }
 
+    protected function post($meta)
+    {
+
+    }
+
     private function makeExtractable(array $array)
     {
         $symbols = [];
@@ -34,5 +37,17 @@ class BlogMetaBuilder extends BuildDecorator
             $symbols[] = '"' . $key . '" => "' . addslashes($value) . '"';
         }
         return '[' . implode(', ', $symbols) . ']';
+    }
+
+    private function processInstructions(array $instructions)
+    {
+        $return = '';
+        foreach ($instructions as $instruction => $options) {
+            $result = call_user_func([$this, $instruction], $options);
+            if ($result) {
+                $return .= $result;
+            }
+        }
+        return $return ? "<?php $return ?>" : '';
     }
 }
