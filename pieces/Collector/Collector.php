@@ -8,6 +8,7 @@ class Collector extends BuildDecorator
 {
     public function boot()
     {
+        parent::boot();
         /** @var BladeCompiler $blade */
         $blade = $this->container[BladeCompiler::class];
 
@@ -32,9 +33,8 @@ class Collector extends BuildDecorator
 
     }
 
-    public function decorate($currentPass, $source)
+    public function decorate($source)
     {
-        echo "current pass is $currentPass\nsource is $source\n";
     }
 
     public function register()

@@ -9,9 +9,17 @@ class Posts implements Collection
         return $this->posts[] = $this->setDefaults($post);
     }
 
-    public function getPosts()
+    public function getPosts($sort = false)
     {
-        return $this->posts;
+        switch ($sort) {
+            case 'month':
+                return collect(array_reverse($this->posts))->transform(function ($post) {
+                    $post['month'] = date('F Y', strtotime($post['published']));
+                    return $post;
+                })->groupBy('month');
+            default:
+                return array_reverse($this->posts);
+        }
     }
 
     protected function setDefaults($post)

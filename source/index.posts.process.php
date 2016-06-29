@@ -1,7 +1,6 @@
 @extends('_layouts.master')
 
 @section('body')
-    <div class="jumbotron"><h1>The Knots Wall</h1></div>
     @verbatim
         @collectindex
         <ul>

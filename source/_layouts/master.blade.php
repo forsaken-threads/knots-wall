@@ -10,7 +10,15 @@
     </head>
     <body>
         <div class="container-fluid">
-            @yield('body')
+            <div class="jumbotron"><h1><a href="/">The Knots Wall</a></h1></div>
+            <div class="col-sm-8">
+                @yield('body')
+            </div>
+            <div class="col-sm-4">
+                <h3>Archives</h3>
+                @include('_layouts.archives')
+            </div>
+            <div class="col-sm-12">Powered by Jigsaw</div>
         </div>
     </body>
 </html>

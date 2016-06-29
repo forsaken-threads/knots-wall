@@ -3,17 +3,19 @@
 use Illuminate\View\Factory;
 use Symfony\Component\Finder\SplFileInfo;
 use TightenCo\Jigsaw\Handlers\BladeHandler;
+use TightenCo\Jigsaw\Jigsaw;
 use TightenCo\Jigsaw\ProcessedFile;
 
 class PostsProcessor extends BladeHandler
 {
-
+    protected $collector;
     protected $viewFactory;
 
-    public function boot(Factory $viewFactory)
+    public function boot(Factory $viewFactory, Collector $collector)
     {
         $this->viewFactory = $viewFactory;
         $this->viewFactory->addExtension('posts.process.php', 'blade');
+        $this->collector = $collector;
     }
 
     public function canHandle($file)
@@ -25,12 +27,12 @@ class PostsProcessor extends BladeHandler
     {
         $contents = $this->render($file, $data);
         // Let's see if this is a collection item
-        if ($this->container->bound('collector.item.path.' . $file->getFilename())) {
-            $filename = 'index.html';
-            $path = $file->getRelativePath() . '/' . $this->container['collector.item.path.' . $file->getFilename()];
-        } else {
+        if ($this->collector->isDecorated(Jigsaw::getCurrentFile()) || !$this->container->bound('collector.item.path.' . $file->getFilename())) {
             $filename = $pass > 0 ? $file->getBasename('.posts.process.php') . '.html' : $file->getBasename();
             $path = $file->getRelativePath();
+        } else {
+            $filename = 'index.html';
+            $path = $file->getRelativePath() . '/' . $this->container['collector.item.path.' . $file->getFilename()];
         }
         return new ProcessedFile($filename, $path, $contents);
     }

@@ -1,14 +1,14 @@
-@extends('_layouts.master')
+@extends('_layouts.post')
+@decorate
 
-@section('body')
-    @collectitem({
-        "title": "This is the End",
-        "author": "Jim Morrison"
-    })
-    <div class="jumbotron"><h1>The Knots Wall</h1></div>
-    <h1>{{ $title or 'none'}}</h1>
-    <p><sub>by {{ $author or 'none' }}</sub></p>
-    <pre>
+@collectitem({
+    "title": "This is the End",
+    "author": "Jim Morrison",
+    "published": "2016-04-13 19:34:30"
+})
+
+@section('post-content')
+<pre>
 This is the end, beautiful friend
 This is the end, my only friend, the end
 Of our elaborate plans, the end
@@ -27,5 +27,5 @@ Weird scenes inside the gold mine
 Ride the highway west, baby
 Ride the snake, ride the snake
 To the lake, the ancient lake, baby
-The snake is long, seven miles</pre>
+The snake is long, seven miles long</pre>
 @endsection
