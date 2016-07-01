@@ -15,7 +15,6 @@
                 @yield('body')
             </div>
             <div class="col-sm-4">
-                <h3>Archives</h3>
                 @include('_layouts.archives')
             </div>
             <div class="col-sm-12">Powered by Jigsaw</div>

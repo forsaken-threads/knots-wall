@@ -1,5 +1,5 @@
 @extends('_layouts.master')
-
+@decorate
 @section('body')
     @verbatim
         @collectindex
