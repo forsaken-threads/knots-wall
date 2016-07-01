@@ -1,5 +1,16 @@
 {
+    "autoload": {
+        "psr-4": {
+            "KnotsWall\\": "pieces"
+        }
+    },
     "require": {
-        "tightenco/jigsaw": "^0.6.1"
-    }
+        "tightenco/jigsaw": "dev-puzzle-pieces"
+    },
+    "repositories": [
+        {
+            "type" : "vcs",
+            "url" : "git@github.com:forsaken-threads/jigsaw.git"
+        }
+    ]
 }

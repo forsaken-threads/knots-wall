@@ -1,0 +1,5 @@
+run composer install
+run npm install
+run ./storm login if you have an account or ./storm signup if you do not
+edit source files
+run ./blogit to build and publish the site

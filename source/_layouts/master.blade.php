@@ -9,6 +9,15 @@
         <script src="/js/other.js"></script>
     </head>
     <body>
-        @yield('body')
+        <div class="container-fluid">
+            <div class="jumbotron"><h1><a href="/">The Knots Wall</a></h1></div>
+            <div class="col-sm-8">
+                @yield('body')
+            </div>
+            <div class="col-sm-4">
+                @include('_layouts.archives')
+            </div>
+            <div class="col-sm-12">Powered by Jigsaw</div>
+        </div>
     </body>
 </html>
