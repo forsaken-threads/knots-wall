@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-archive"></i> {{ rss.meta.title }}</div>
+    <div class="panel-body">
+        <dl>
+            <template v-for="entry in rss.entries | limitBy limit start">
+                <dt>
+                    <a class="pull-right" :href="entry.link"><i class="fa fa-external-link text-primary"></i></a>
+                    {{ entry.title }} : {{ entry.date | date true }}
+                </dt>
+                <dd><text-snippet :full-text="entry.summary"></text-snippet></dd>
+            </template>
+        </dl>
+        <div class="clearfix">
+            <button @click="scroll(-1)" type="button" class="btn pull-left" :disabled="start == 0"><i class="fa fa-arrow-left"></i></button>
+            <button @click="scroll(1)" type="button" class="btn pull-right" :disabled="start + limit > rss.entries.length"><i class="fa fa-arrow-right"></i></button>
+        </div>
+        <h6>Last Update: {{ rss.meta.date | date }}</h6>
+    </div>
+</div>

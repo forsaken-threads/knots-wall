@@ -5,7 +5,8 @@ var argv = require('yargs').argv;
 // Asset Component Paths
 var paths = {
     'bower': 'vendor/bower_components',
-    'assets': 'source/_assets'
+    'assets': 'source/_assets',
+    'compiled': 'source/_assets/_compiled',
 };
 
 elixir.config.assetsPath = 'source/_assets';
@@ -16,15 +17,23 @@ elixir(function(mix) {
 
     mix
         .scripts([
-            paths.bower + '/bootstrap/dist/js/bootstrap.js'
-        ], 'source/js/other.js', './')
+            paths.compiled + '/pre/**/*.js'
+        ], paths.compiled + '/post/app.js', './')
+        .browserify(paths.compiled + '/post/app.js', 'source/js/app.js', './')
+        .scripts([
+            paths.assets + '/js/**/*.js',
+            paths.bower + '/vue/dist/vue.js',
+            paths.bower + '/jquery/dist/jquery.js',
+            paths.bower + '/bootstrap/dist/js/bootstrap.js',
+            paths.bower + '/js-cookie/src/js.cookie.js'
+        ], 'source/js/main.js', './')
         .styles([
             paths.bower + '/bootstrap/dist/css/bootstrap.css',
-            paths.bower + '/font-awesome/css/font-awesome.css'
-        ], 'source/css/other.css', './')
+            paths.bower + '/font-awesome/css/font-awesome.css',
+            paths.assets + '/css/**/*.css'
+        ], 'source/css/app.css', './')
         .copy(paths.bower + '/bootstrap/dist/fonts/*.*', 'source/fonts/')
         .copy(paths.bower + '/font-awesome/fonts/*.*', 'source/fonts/')
-        .sass('main.scss')
         .exec('./jigsaw build ' + env, ['./source/*', './source/**/*', '!./source/_assets/**/*'])
         .browserSync({
             server: { baseDir: 'build_' + env },
