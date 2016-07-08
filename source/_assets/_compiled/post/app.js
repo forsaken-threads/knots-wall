@@ -1,10 +1,24 @@
 Vue.component('rss-widget', {
+    beforeCompile: function() {
+        if (!Cookies.getJSON(this.btoa(this.url)).collapsed) {
+            this.fetchFeed();
+        }
+    },
     data: function() {
+        if (Cookies.getJSON(this.btoa(this.url)) == undefined) {
+            Cookies.set(this.btoa(this.url), {
+                articleLimit: 5,
+                collapsed: true,
+                start: 0
+            });
+        }
         return {
+            articleLimit: Cookies.getJSON(this.btoa(this.url)).articleLimit,
+            collapsed: Cookies.getJSON(this.btoa(this.url)).collapsed,
+            start: Cookies.getJSON(this.btoa(this.url)).start,
             rss: {
                 entries: [],
                 meta: {
-                    title: 'RSS Widget',
                     update: 'never'
                 }
             }
@@ -20,35 +34,57 @@ Vue.component('rss-widget', {
         }
     },
     methods: {
+        btoa: function(value) {
+            return btoa(value).replace('/', '-').replace('=', '_').replace('+', ':');
+        },
+        fetchFeed: function() {
+            feednami.load(this.url, this.loadRss);
+        },
+        hide: function() {
+            this.collapsed = true;
+            this.save();
+        },
+        save: function() {
+            Cookies.set(this.btoa(this.url), {
+                articleLimit: this.articleLimit,
+                collapsed: this.collapsed,
+                start: this.start
+            });
+        },
+        show: function() {
+            this.collapsed = false;
+            if (this.rss.entries.length == 0) {
+                this.fetchFeed();
+            }
+            this.save();
+        },
         loadRss: function(result) {
             if (result.error) {
                 console.log(result.error);
             } else {
-                console.log(result.feed.entries);
                 this.rss = result.feed;
             }
         },
         scroll: function(direction) {
-            this.start = this.start + (this.limit * direction);
+            this.start = this.start + (this.articleLimit * parseInt(direction));
+            this.save();
         }
     },
     props: {
-        limit: {
-            default: function () {
-                return 5;
-            }
-        },
-        start: {
-            default: function() {
-                return 0;
-            }
-        },
-        url: null
+        'title': null,
+        'url': null
     },
     ready: function() {
-        feednami.load(this.url, this.loadRss);
+        $('#' + this.btoa(this.url)).on('show.bs.collapse', this.show);
+        $('#' + this.btoa(this.url)).on('hide.bs.collapse', this.hide);
     },
-    template: require('../pre/rss-widget.html')
+    template: require('../pre/rss-widget.html'),
+    watch: {
+        articleLimit: function(newVal, oldVal) {
+            this.start = 0;
+            this.save();
+        }
+    }
 });
 Vue.component('text-snippet', {
     beforeCompile: function() {

@@ -21,11 +21,11 @@ elixir(function(mix) {
         ], paths.compiled + '/post/app.js', './')
         .browserify(paths.compiled + '/post/app.js', 'source/js/app.js', './')
         .scripts([
-            paths.assets + '/js/**/*.js',
             paths.bower + '/vue/dist/vue.js',
             paths.bower + '/jquery/dist/jquery.js',
             paths.bower + '/bootstrap/dist/js/bootstrap.js',
-            paths.bower + '/js-cookie/src/js.cookie.js'
+            paths.bower + '/js-cookie/src/js.cookie.js',
+            paths.assets + '/js/**/*.js'
         ], 'source/js/main.js', './')
         .styles([
             paths.bower + '/bootstrap/dist/css/bootstrap.css',
