@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <button class="btn btn-block" data-toggle="collapse" href="#{{ btoa(url) }}" aria-expanded="false" aria-controls="{{ btoa(url) }}">
+        <button class="btn btn-block btn-text-left" data-toggle="collapse" href="#{{ btoa(url) }}" aria-expanded="false" aria-controls="{{ btoa(url) }}">
             <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-square-o-down': 'fa-caret-square-o-up']"></i></span>
             <i class="fa fa-rss-square"></i> {{ title }}
         </button>
@@ -11,7 +11,7 @@
                 <template v-for="entry in rss.entries | limitBy articleLimit start">
                     <dt>
                         <a class="pull-right" :href="entry.link"><i class="fa fa-external-link text-primary"></i></a>
-                        {{ entry.title }} : {{ entry.date | date true }}
+                        {{ entry.date | date true }} : {{ entry.title }}
                     </dt>
                     <dd><text-snippet :full-text="entry.summary"></text-snippet></dd>
                 </template>

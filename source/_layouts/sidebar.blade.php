@@ -1,7 +1,7 @@
 <h3>Get Untied!</h3>
 <div id="ArchivesPanel" class="panel panel-default">
     <div class="panel-heading">
-        <button @click="toggle" class="btn btn-block" href="#Archives" data-toggle="collapse" aria-expanded="false" aria-controls="Archives">
+        <button @click="toggle" class="btn btn-block btn-text-left" href="#Archives" data-toggle="collapse" aria-expanded="false" aria-controls="Archives">
             <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-square-o-down' : 'fa-caret-square-o-up']"></i></span>
             <i class="fa fa-archive"></i> Archives
         </button>

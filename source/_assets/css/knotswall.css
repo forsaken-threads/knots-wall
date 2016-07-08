@@ -1,7 +1,7 @@
-.laravel {
-    color: #f4645f;
+.btn-text-left {
+    text-align: left !important;
 }
 
-.text-white {
-    color: white;
+.laravel {
+    color: #f4645f;
 }
