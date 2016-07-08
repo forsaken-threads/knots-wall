@@ -6,7 +6,7 @@ var argv = require('yargs').argv;
 var paths = {
     'bower': 'vendor/bower_components',
     'assets': 'source/_assets',
-    'compiled': 'source/_assets/_compiled',
+    'compiled': 'source/_assets/_compiled'
 };
 
 elixir.config.assetsPath = 'source/_assets';
@@ -27,8 +27,10 @@ elixir(function(mix) {
             paths.bower + '/js-cookie/src/js.cookie.js',
             paths.assets + '/js/**/*.js'
         ], 'source/js/main.js', './')
+        .less('knotswall.less', 'source/_assets/css/knotswall.css', {
+            paths: paths.bower + '/bootstrap/less'
+        })
         .styles([
-            paths.bower + '/bootstrap/dist/css/bootstrap.css',
             paths.bower + '/font-awesome/css/font-awesome.css',
             paths.assets + '/css/**/*.css'
         ], 'source/css/app.css', './')

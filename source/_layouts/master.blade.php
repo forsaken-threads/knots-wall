@@ -9,7 +9,7 @@
         <script src="/js/app.js"></script>
     </head>
     <body>
-        <div class="well">
+        <div class="well square">
             <h1><a href="/">Th<span class="laravel">e</span> Kn<span class="laravel">ot</span>s <span class="laravel">W</span>a<span class="laravel">ll</span></a></h1>
             <div><small>Powered by <a href="https://github.com/tightenco/jigsaw/">Jigsaw</a></small></div>
         </div>

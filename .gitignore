@@ -4,3 +4,5 @@ composer.lock
 /build*/
 /.idea/
 /source/css
+/source/js
+/source/fonts
