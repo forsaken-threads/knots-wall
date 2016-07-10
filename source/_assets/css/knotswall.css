@@ -1082,12 +1082,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #24645f;
+  color: #70a442;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #102c2a;
+  color: #4b6d2c;
   text-decoration: underline;
 }
 a:focus {
@@ -3369,7 +3369,7 @@ fieldset[disabled] .btn-danger.focus {
   background-color: #fff;
 }
 .btn-link {
-  color: #24645f;
+  color: #70a442;
   font-weight: normal;
   border-radius: 0;
 }
@@ -3389,7 +3389,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #102c2a;
+  color: #4b6d2c;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -3961,7 +3961,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a:hover,
 .nav .open > a:focus {
   background-color: #eeeeee;
-  border-color: #24645f;
+  border-color: #70a442;
 }
 .nav .nav-divider {
   height: 1px;
@@ -4676,7 +4676,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 6px 12px;
   line-height: 1.42857143;
   text-decoration: none;
-  color: #24645f;
+  color: #70a442;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: -1px;
@@ -4697,7 +4697,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
   z-index: 2;
-  color: #102c2a;
+  color: #4b6d2c;
   background-color: #eeeeee;
   border-color: #ddd;
 }
@@ -4895,7 +4895,7 @@ a.badge:focus {
 }
 .list-group-item.active > .badge,
 .nav-pills > .active > a > .badge {
-  color: #24645f;
+  color: #70a442;
   background-color: #fff;
 }
 .list-group-item > .badge {
@@ -4968,7 +4968,7 @@ a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #24645f;
+  border-color: #70a442;
 }
 .thumbnail .caption {
   padding: 9px;
@@ -6640,6 +6640,9 @@ button.close {
 }
 .btn-text-left {
   text-align: left !important;
+}
+dt {
+  color: #70a442;
 }
 .laravel {
   color: #f4645f;

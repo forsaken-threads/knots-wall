@@ -2,9 +2,7 @@
   "name": "knots-wall",
   "devDependencies": {
     "bootstrap": "^3.3.6",
-    "font-awesome": "fontawesome#^4.6.3"
-  },
-  "dependencies": {
+    "font-awesome": "fontawesome#^4.6.3",
     "vue": "^1.0.26",
     "js-cookie": "^2.1.2"
   }
