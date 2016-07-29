@@ -37,6 +37,7 @@ elixir(function(mix) {
         .copy(paths.bower + '/bootstrap/dist/fonts/*.*', 'source/fonts/')
         .copy(paths.bower + '/font-awesome/fonts/*.*', 'source/fonts/')
         .exec('./jigsaw build ' + env, ['./source/*', './source/**/*', '!./source/_assets/**/*'])
+        .exec('rsync -cvr ~/Projects/knots-wall/build_local/ redrover@spartang.com:/var/www/knotswall/jigsaw')
         .browserSync({
             server: { baseDir: 'build_' + env },
             proxy: null,

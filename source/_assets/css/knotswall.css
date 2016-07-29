@@ -6644,17 +6644,39 @@ button.close {
 dt {
   color: #70a442;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #24645f;
+}
 .laravel {
   color: #f4645f;
 }
-.fa-knotswall-dark {
-  color: #24645f;
+.post-excerpt {
+  font-size: 14px;
 }
-.fa-knotswall-light {
+.post-excerpt p::after {
+  content: " \2026";
+}
+.post-excerpt p::first-line {
   color: #27bab5;
+  font-size: 18px;
 }
 .square {
   border-radius: 0;
+}
+.text-knotswall-dark {
+  color: #24645f;
+}
+.text-knotswall-dark:focus,
+.text-knotswall-dark:hover {
+  color: #27bab5;
+}
+.text-knotswall-light {
+  color: #27bab5;
 }
 
 /*# sourceMappingURL=knotswall.css.map */

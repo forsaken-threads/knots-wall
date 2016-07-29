@@ -1,12 +1,12 @@
 <h3 class="text-center">Other Ways to Get Untied</h3>
 <div id="ArchivesPanel" class="panel panel-default">
     <div class="panel-heading">
-        <button @click="toggle" class="btn btn-default btn-block btn-text-left" href="#Archives" data-toggle="collapse" aria-expanded="false" aria-controls="Archives">
-            <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-square-o-down' : 'fa-caret-square-o-up']"></i></span>
-            <i class="fa fa-folder-open fa-knotswall-light"></i> Archives
+        <button class="btn btn-default btn-block btn-text-left" href="#Archives" data-toggle="collapse" aria-expanded="false" aria-controls="Archives">
+            <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-down' : 'fa-caret-up']"></i></span>
+            <i class="fa fa-folder-open text-knotswall-light"></i> Archives
         </button>
     </div>
-    <div id="Archives" class="list-group panel-collapse in">
+    <div id="Archives" class="list-group panel-collapse collapse" :class="{ 'in': !collapsed }">
     @verbatim
         @collectindex
         <div class="panel-body">
@@ -15,7 +15,7 @@
                    class="list-group-item list-group-item-info list"><span class="badge">{{ count($posts) }}</span><h4 class="list-group-item-heading">{{ $month }}</h4></a>
                 <div id="collapseArchives{{ str_slug($month) }}" class="collapse">
                 @foreach ($posts as $post)
-                    <a class="list-group-item" href="/posts/{{ $post['slug'] }}/index.html">{{ $post['author'] }}: {{ $post['title'] }}</a>
+                    <div class="list-group-item">{{ $post['author'] }}: <a href="/posts/{{ $post['slug'] }}/index.html">{{ $post['title'] }}</a></div>
                 @endforeach
                 </div>
             @endforeach
@@ -30,9 +30,15 @@
         },
         el: '#ArchivesPanel',
         methods: {
-            toggle: function() {
-                this.collapsed = ! this.collapsed;
+            hide: function() {
+                this.collapsed = false;
+            },
+            show: function() {
+                this.collapsed = true;
             }
+        },
+        ready: function() {
+            $('#Tags').on('show.bs.collapse', this.show).on('hide.bs.collapse', this.hide);
         }
     });
 </script>
@@ -40,3 +46,43 @@
 <script type="text/javascript">new Vue({ el: '#laranews' });</script>
 <div id="laracasts"><rss-widget title="Laracasts" url="https://laracasts.com/feed"></rss-widget></div>
 <script type="text/javascript">new Vue({ el: '#laracasts' });</script>
+<div id="TagsPanel" class="panel panel-default">
+    <div class="panel-heading">
+        <button class="btn btn-default btn-block btn-text-left" href="#Tags" data-toggle="collapse" aria-expanded="false" aria-controls="Tags">
+            <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-down' : 'fa-caret-up']"></i></span>
+            <i class="fa fa-tags text-knotswall-light"></i> Tags
+        </button>
+    </div>
+    <div id="Tags" class="list-group panel-collapse collapse" :class="{ 'in': !collapsed }">
+        @verbatim
+        @collectindex
+        <div class="panel-body">
+            @foreach ($collection->getPosts('tags') as $tag => $posts)
+                <a role="button" href="/posts/tagged/{{ str_slug($tag) }}" class="list-group-item list-group-item-info list">
+                    <span class="badge">{{ count($posts) }}</span>
+                    <span class="h4 list-group-item-heading">{{ $tag }}</span>
+                </a>
+            @endforeach
+        </div>
+        @endverbatim
+    </div>
+</div>
+<script type="text/javascript">
+    new Vue({
+        data: {
+            collapsed: true
+        },
+        el: '#TagsPanel',
+        methods: {
+            hide: function() {
+                this.collapsed = false;
+            },
+            show: function() {
+                this.collapsed = true;
+            }
+        },
+        ready: function() {
+            $('#Tags').on('show.bs.collapse', this.show).on('hide.bs.collapse', this.hide);
+        }
+    });
+</script>

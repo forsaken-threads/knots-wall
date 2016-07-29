@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="well square">
-            <h1><a href="/">Th<span class="laravel">e</span> Kn<span class="laravel">ot</span>s <span class="laravel">W</span>a<span class="laravel">ll</span></a></h1>
+            <h1><a href="/" class="text-knotswall-dark">Th<span class="laravel">e</span> Kn<span class="laravel">ot</span>s <span class="laravel">W</span>a<span class="laravel">ll</span></a></h1>
             <div><small>Powered by <a href="https://github.com/tightenco/jigsaw/">Jigsaw</a></small></div>
         </div>
         <div class="container-fluid">

@@ -3,7 +3,9 @@
 
 @section('body')
     <h1>{{ $title }}</h1>
-    <p><sub>by {{ $author }}</sub></p>
-    @yield('post-content')
-    <p>published {{ $published }}</p>
+    <p><small>by {{ $author }}, published {{ date('n/j/Y g:iA', strtotime($published)) }}</small></p>
+    <div class="post-content">
+        @yield('post-content')
+    </div>
+    <hr />
 @endsection

@@ -6,3 +6,5 @@ composer.lock
 /source/css
 /source/js
 /source/fonts
+/source/_assets/_compiled/post
+/_tmp

@@ -1,8 +1,8 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <button class="btn btn-default btn-block btn-text-left" data-toggle="collapse" href="#{{ btoa(url) }}" aria-expanded="false" aria-controls="{{ btoa(url) }}">
-            <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-square-o-down': 'fa-caret-square-o-up']"></i></span>
-            <i class="fa fa-rss-square fa-knotswall-light"></i> {{ title }}
+            <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-down': 'fa-caret-up']"></i></span>
+            <i class="fa fa-rss-square text-knotswall-light"></i> {{ title }}
         </button>
     </div>
     <div id="{{ btoa(url) }}" class="panel-body collapse" :class="{ 'in': !collapsed }">

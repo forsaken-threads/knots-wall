@@ -75,8 +75,7 @@ Vue.component('rss-widget', {
         'url': null
     },
     ready: function() {
-        $('#' + this.btoa(this.url)).on('show.bs.collapse', this.show);
-        $('#' + this.btoa(this.url)).on('hide.bs.collapse', this.hide);
+        $('#' + this.btoa(this.url)).on('show.bs.collapse', this.show).on('hide.bs.collapse', this.hide);
     },
     template: require('../pre/rss-widget.html'),
     watch: {
