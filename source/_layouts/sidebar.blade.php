@@ -1,88 +1,62 @@
+@verbatim
+@collectindex
 <h3 class="text-center">Other Ways to Get Untied</h3>
-<div id="ArchivesPanel" class="panel panel-default">
-    <div class="panel-heading">
-        <button class="btn btn-default btn-block btn-text-left" href="#Archives" data-toggle="collapse" aria-expanded="false" aria-controls="Archives">
-            <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-down' : 'fa-caret-up']"></i></span>
-            <i class="fa fa-folder-open text-knotswall-light"></i> Archives
-        </button>
-    </div>
-    <div id="Archives" class="list-group panel-collapse collapse" :class="{ 'in': !collapsed }">
-    @verbatim
-        @collectindex
-        <div class="panel-body">
-            @foreach ($collection->getPosts('month') as $month => $posts)
-                <a role="button" data-toggle="collapse" href="#collapseArchives{{ str_slug($month) }}" aria-expanded="false" aria-controls="collapseArchives{{ str_slug($month) }}"
-                   class="list-group-item list-group-item-info list"><span class="badge">{{ count($posts) }}</span><h4 class="list-group-item-heading">{{ $month }}</h4></a>
-                <div id="collapseArchives{{ str_slug($month) }}" class="collapse">
-                @foreach ($posts as $post)
-                    <div class="list-group-item">{{ $post['author'] }}: <a href="/posts/{{ $post['slug'] }}/index.html">{{ $post['title'] }}</a></div>
-                @endforeach
-                </div>
+<div id="ArchivesPanel">
+    <collection-panel name="Archives" :collapsed-default="false">
+        @foreach ($collection->getPosts('month') as $month => $posts)
+            <a role="button" data-toggle="collapse" href="#collapseArchives{{ str_slug($month) }}" aria-expanded="false" aria-controls="collapseArchives{{ str_slug($month) }}"
+               class="list-group-item list-group-item-info list"><span class="badge">{{ count($posts) }}</span><h4 class="list-group-item-heading">{{ $month }}</h4></a>
+            <div id="collapseArchives{{ str_slug($month) }}" class="collapse archives-collapse" :class="{ 'in' : !collapsed['collapseArchives{{ str_slug($month) }}'] }">
+            @foreach ($posts as $post)
+                <div class="list-group-item">{{ $post['author'] }}: <a href="/posts/{{ $post['slug'] }}/index.html">{{ $post['title'] }}</a></div>
             @endforeach
-        </div>
-    @endverbatim
-    </div>
+            </div>
+        @endforeach
+    </collection-panel>
+</div>
+<div id="laranews">
+    <rss-widget title="Laravel News" url="https://laravel-news.com/feed/"></rss-widget>
+</div>
+<div id="laracasts">
+    <rss-widget title="Laracasts" url="https://laracasts.com/feed"></rss-widget>
+</div>
+<div id="TagsPanel">
+    <collection-panel name="Tags">
+        @foreach ($collection->getPosts('tags') as $tag => $posts)
+            <a role="button" href="/posts/tagged/{{ str_slug($tag) }}" class="list-group-item list-group-item-info list">
+                <span class="badge">{{ count($posts) }}</span>
+                <span class="h4 list-group-item-heading">{{ $tag }}</span>
+            </a>
+        @endforeach
+    </collection-panel>
 </div>
 <script type="text/javascript">
     new Vue({
-        data: {
-            collapsed: false
-        },
         el: '#ArchivesPanel',
-        methods: {
-            hide: function() {
-                this.collapsed = false;
-            },
-            show: function() {
-                this.collapsed = true;
-            }
-        },
-        ready: function() {
-            $('#Tags').on('show.bs.collapse', this.show).on('hide.bs.collapse', this.hide);
-        }
-    });
-</script>
-<div id="laranews"><rss-widget title="Laravel News" url="https://laravel-news.com/feed/"></rss-widget></div>
-<script type="text/javascript">new Vue({ el: '#laranews' });</script>
-<div id="laracasts"><rss-widget title="Laracasts" url="https://laracasts.com/feed"></rss-widget></div>
-<script type="text/javascript">new Vue({ el: '#laracasts' });</script>
-<div id="TagsPanel" class="panel panel-default">
-    <div class="panel-heading">
-        <button class="btn btn-default btn-block btn-text-left" href="#Tags" data-toggle="collapse" aria-expanded="false" aria-controls="Tags">
-            <span class="pull-right"><i class="fa" :class="[collapsed ? 'fa-caret-down' : 'fa-caret-up']"></i></span>
-            <i class="fa fa-tags text-knotswall-light"></i> Tags
-        </button>
-    </div>
-    <div id="Tags" class="list-group panel-collapse collapse" :class="{ 'in': !collapsed }">
-        @verbatim
-        @collectindex
-        <div class="panel-body">
-            @foreach ($collection->getPosts('tags') as $tag => $posts)
-                <a role="button" href="/posts/tagged/{{ str_slug($tag) }}" class="list-group-item list-group-item-info list">
-                    <span class="badge">{{ count($posts) }}</span>
-                    <span class="h4 list-group-item-heading">{{ $tag }}</span>
-                </a>
-            @endforeach
-        </div>
-        @endverbatim
-    </div>
-</div>
-<script type="text/javascript">
-    new Vue({
         data: {
-            collapsed: true
+            collapsed: {
+                @foreach ($collection->getPosts('month') as $month => $posts)
+                "collapseArchives{{ str_slug($month) }}": kwc.getIndex('archivesPanel', 'collapseArchives{{ str_slug($month) }}', true),
+                @endforeach
+                last: false
+            }
         },
-        el: '#TagsPanel',
         methods: {
-            hide: function() {
-                this.collapsed = false;
+            hide: function(e) {
+                this.collapsed[e.target.id] = true;
+                kwc.setIndex('archivesPanel', e.target.id, true);
             },
-            show: function() {
-                this.collapsed = true;
+            show: function(e) {
+                this.collapsed[e.target.id] = false;
+                kwc.setIndex('archivesPanel', e.target.id, false);
             }
         },
         ready: function() {
-            $('#Tags').on('show.bs.collapse', this.show).on('hide.bs.collapse', this.hide);
+            $('.archives-collapse').on('show.bs.collapse', this.show).on('hide.bs.collapse', this.hide);
         }
     });
+    new Vue({ el: '#laranews' });
+    new Vue({ el: '#laracasts' });
+    new Vue({ el: '#TagsPanel' });
 </script>
+@endverbatim

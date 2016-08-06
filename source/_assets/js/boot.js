@@ -1,5 +1,7 @@
 var kwc = {
     data: {
+        archivesPanel: { },
+        collectionPanels: { },
         twoQuickNotesCollapsed: false,
         twoQuickNotesViewed: 0
     },
@@ -8,6 +10,12 @@ var kwc = {
             return def;
         }
         return this.data[key];
+    },
+    getIndex: function(key, index, def) {
+        if (this.data[key] == undefined || this.data[key][index] == undefined) {
+            return def;
+        }
+        return this.data[key][index];
     },
     create: function() {
         if (Cookies.get('settings') == undefined) {
@@ -23,6 +31,9 @@ var kwc = {
             }
             this.data = data;
         }
+    },
+    has: function(key) {
+        return this.data[key] != undefined;
     },
     increment: function(key, max) {
         if (max != undefined && parseInt(this.get(key, 0)) > parseInt(max)) {
@@ -40,6 +51,13 @@ var kwc = {
     },
     set: function(key, value) {
         this.data[key] = value;
+        this.save();
+    },
+    setIndex: function(key, index, value) {
+        if (!this.has(key)) {
+            this.data[key] = { };
+        }
+        this.data[key][index] = value;
         this.save();
     },
     toggle: function(key) {

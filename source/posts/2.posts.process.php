@@ -4,7 +4,7 @@
 @collectitem({
     "title": "Beyond the Basics",
     "author": "Keith Freeman",
-    "published": "2016-07-11 20:00",
+    "published": "2016-07-29 02:11",
     "tags": ["Pagination", "Build Decoration"]
 })
 @postset(excerpt,
@@ -16,8 +16,7 @@
     <p>Wait, what? A <code>File Handler</code>? The <code>Paginator</code> is really just a way of rebuilding the same file over and over again.  Each page follows the same format, you simply have different content on each page.  A collection of posts could be paginated by date newer to older or vice-versa.  Similarly, each page could contain a list of posts that were tagged with the same tag.  Using it is very simple.  Use the <code>&commat;decorate</code> directive to signal Build Decoration, and then use the <code>&commat;paginate</code> directive to supply the method of a Paginator on a Collection object and a reference to that Collection object.  (At a basic level, a Paginator would act on a Collection by grouping items together by a set of keys, or pages.)  Then you wrap your content with <code>verbatim</code> tags.  On the second pass, two variables will be passed into the view: <code>$page</code> and <code>$items</code>.  The first is the page, or key, from the Paginated Collection object, and the second is the list of items that are associated with that key.  Here's a simple example of paginating blog posts by tag:</p>
     @verbatim
     @verbatim
-<pre>
-&commat;extends('_layouts.master')
+<pre><code class="language-php">&commat;extends('_layouts.master')
 &commat;decorate
 &commat;paginate(paginateByTags, collection.posts)
 
@@ -34,8 +33,7 @@
             &lt;/blockquote>
         &commat;endforeach
     &commat;endverbatim
-&commat;endsection
-</pre>
+&commat;endsection</code></pre>
     @endverbatim
     @endverbatim
     <p>The <code>Paginator File Handler</code> will loop through the paginated collection, reprocessing the Blade file, inserting new data each time.  Each iteration, or page, will be saved much like a normal post, in place using a slugged version of the <code>$page</code> and with <code>/index.html</code> added to the end.</p>

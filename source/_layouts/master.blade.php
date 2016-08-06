@@ -7,6 +7,9 @@
         <link rel="stylesheet" href="/css/app.css">
         <script src="/js/main.js"></script>
         <script src="/js/app.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/kimbie.dark.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </head>
     <body>
         <div class="well square">
